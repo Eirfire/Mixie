@@ -1,13 +1,13 @@
+import { auth } from "@clerk/nextjs";
+import { db } from "@db/index";
+import { info, recipes } from "@db/schemas";
+import { NewInfo, NewPartialRecipe } from "@db/types";
 import {
   convertIngredients,
   getRecipeJsonLd,
   splitTime,
 } from "@lib/services/recipeJsonLDParsing";
 import { recipeId } from "@lib/utils";
-import { db } from "@db/index";
-import { info, recipes } from "@db/schemas";
-import { NewInfo, NewPartialRecipe } from "@db/types";
-import { getServerAuthSession } from "@server/auth";
 import { NextResponse, type NextRequest } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import * as z from "zod";
@@ -19,12 +19,11 @@ const createRecipeSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerAuthSession();
+    const { user } = await auth();
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
-    const { user } = session;
 
     const json = await req.json();
     const { title, link } = createRecipeSchema.parse(json);
@@ -37,10 +36,10 @@ export async function POST(req: NextRequest) {
         recipeId: uid,
         id,
         title,
-        createByName: user.name! || "",
+        createByName: user.firstName! || "",
         createdBy: user.id,
         lastUpdatedBy: user.id,
-        lastUpdatedByName: user.name! || "",
+        lastUpdatedByName: user.firstName! || "",
         isPublic: false,
       };
 
@@ -49,10 +48,10 @@ export async function POST(req: NextRequest) {
         uid: uid,
         id,
         title,
-        createByName: user.name! || "",
+        createByName: user.firstName! || "",
         createdBy: user.id,
         lastUpdatedBy: user.id,
-        lastUpdatedByName: user.name! || "",
+        lastUpdatedByName: user.firstName! || "",
         isPublic: false,
       };
 
@@ -85,10 +84,10 @@ export async function POST(req: NextRequest) {
           recipeId: uid,
           id: recipeId(recipe.name),
           title: recipe.name,
-          createByName: user.name! || "",
+          createByName: user.firstName! || "",
           createdBy: user.id,
           lastUpdatedBy: user.id,
-          lastUpdatedByName: user.name! || "",
+          lastUpdatedByName: user.firstName! || "",
           cook: splitTime(recipe.cookTime),
           prep: splitTime(recipe.prepTime),
           total: splitTime(recipe.totalTime),
@@ -107,10 +106,10 @@ export async function POST(req: NextRequest) {
           uid: uid,
           id: recipeId(recipe.name),
           title: recipe.name,
-          createByName: user.name! || "",
+          createByName: user.firstName! || "",
           createdBy: user.id,
           lastUpdatedBy: user.id,
-          lastUpdatedByName: user.name! || "",
+          lastUpdatedByName: user.firstName! || "",
           description:
             recipe.description.replace(
               /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g,

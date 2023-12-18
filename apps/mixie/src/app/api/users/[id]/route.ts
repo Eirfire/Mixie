@@ -1,5 +1,5 @@
 import { isApp } from "@/src/common/lib/services/apiMiddleware";
-import { getServerAuthSession } from "@/src/server/auth";
+import { auth, currentUser } from "@clerk/nextjs";
 import { db } from "@db/index";
 import { users } from "@db/schemas";
 import { eq } from "drizzle-orm";
@@ -11,11 +11,11 @@ export async function GET(
 ) {
   try {
     const app = await isApp(req);
-    const session = await getServerAuthSession();
+    const { user: signedInUser } = await auth();
 
-    const requestedUserData = session?.user.id === params.id;
+    const requestedUserData = signedInUser!.id === params.id;
 
-    if ((!app || !session) && !requestedUserData) {
+    if ((!app || !signedInUser) && !requestedUserData) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
 

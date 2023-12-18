@@ -1,13 +1,8 @@
 "use client";
 import { Button } from "@/src/common/components/ui/button";
-import { Checkbox } from "@/src/common/components/ui/checkbox";
-import { Input } from "@/src/common/components/ui/input";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { useSignIn } from "@clerk/nextjs";
+import { OAuthStrategy } from "@clerk/nextjs/dist/types/server";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 
 const emailForm = z.object({
@@ -18,33 +13,43 @@ const emailForm = z.object({
 });
 
 const LoginPage = () => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<z.infer<typeof emailForm>>({
-    resolver: zodResolver(emailForm),
-  });
-  const router = useRouter();
+  const { signIn } = useSignIn();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   control,
+  //   formState: { errors },
+  // } = useForm<z.infer<typeof emailForm>>({
+  //   resolver: zodResolver(emailForm),
+  // });
 
-  const onSubmit: SubmitHandler<z.infer<typeof emailForm>> = async (data) => {
-    signIn("email", { email: data.email, callbackUrl: "/", redirect: false });
-    router.push(
-      "/auth/verify?" + new URLSearchParams({ email: data.email }).toString()
-    );
+  // const router = useRouter();
+
+  // const onSubmit: SubmitHandler<z.infer<typeof emailForm>> = async (data) => {
+  //   signIn("email", { email: data.email, callbackUrl: "/", redirect: false });
+  //   router.push(
+  //     "/auth/verify?" + new URLSearchParams({ email: data.email }).toString()
+  //   );
+  // };
+
+  const signInWith = (strategy: OAuthStrategy) => {
+    return signIn!.authenticateWithRedirect({
+      strategy,
+      redirectUrl: "/sso-callback",
+      redirectUrlComplete: "/",
+    });
   };
 
   const signInWithGithub = async () => {
-    signIn("github", { callbackUrl: "/" });
+    signInWith("oauth_github");
   };
 
   const signInWithGoogle = async () => {
-    signIn("google", { callbackUrl: "/" });
+    signInWith("oauth_google");
   };
 
   const signInWithFacebook = async () => {
-    signIn("facebook", { callbackUrl: "/" });
+    signInWith("oauth_facebook");
   };
 
   return (
@@ -57,7 +62,7 @@ const LoginPage = () => {
           height={128}
           className="h-32 w-32 rounded-full"
         />
-        <h1 className="text-step--1">Welcome to Meally</h1>
+        <h1 className="text-step--1">Welcome to Mixie</h1>
       </div>
       {/* <form
         className="flex w-2/3 flex-col  gap-4"
@@ -100,7 +105,7 @@ const LoginPage = () => {
               <p className="text-step--4 opacity-90">
                 You agree to our{" "}
                 <Link
-                  href="https://meally.com.au/info/terms_service"
+                  href="https://mixiecooking.com/info/terms_service"
                   target="_blank"
                   className="text-[#188FA7] underline underline-offset-2"
                 >
@@ -108,7 +113,7 @@ const LoginPage = () => {
                 </Link>{" "}
                 and{" "}
                 <Link
-                  href="https://meally.com.au/info/privacy_policy"
+                  href="https://mixiecooking.com/info/privacy_policy"
                   target="_blank"
                   className="text-[#188FA7] underline underline-offset-2"
                 >
@@ -121,7 +126,7 @@ const LoginPage = () => {
         />
         <Button
           type="submit"
-          ariaLabel="Log into Meally"
+          ariaLabel="Log into Mixie"
           className="mx-auto w-full"
         >
           Log in

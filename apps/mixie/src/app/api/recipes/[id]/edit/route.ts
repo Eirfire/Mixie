@@ -1,22 +1,22 @@
+import { auth } from "@clerk/nextjs";
 import { db } from "@db/index";
 import { info, recipes } from "@db/schemas";
 import { NewInfo, NewPartialRecipe } from "@db/types";
 import { recipeFormSchema } from "@db/zodSchemas";
 import { calculateTotalTime, recipeId } from "@lib/utils";
-import { getServerAuthSession } from "@server/auth";
 import { eq } from "drizzle-orm";
 import { NextResponse, type NextRequest } from "next/server";
 import * as z from "zod";
 
 export async function PUT(req: NextRequest) {
   try {
-    const session = await getServerAuthSession();
+    const { user } = await auth();
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
 
-    const { user } = session;
+
 
     const json = await req.json();
     json.createdAt = new Date(json.createdAt);
@@ -79,7 +79,7 @@ export async function PUT(req: NextRequest) {
       createByName: recipe.info?.createByName || "",
       createdBy: recipe.info?.createdBy || user.id,
       lastUpdatedBy: user.id,
-      lastUpdatedByName: user.name! || "",
+      lastUpdatedByName: user.firstName! || "",
       isPublic: isPublic,
     };
     await db.update(info).set(newInfo).where(eq(info.recipeId, recipe.uid));
@@ -94,7 +94,7 @@ export async function PUT(req: NextRequest) {
       isPublic: isPublic,
       // steps: steps,
       lastUpdatedBy: user.id,
-      lastUpdatedByName: user.name! || "",
+      lastUpdatedByName: user.firstName! || "",
     };
 
     const setRecipe = await db

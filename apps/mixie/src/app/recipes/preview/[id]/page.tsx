@@ -1,4 +1,4 @@
-import { getServerAuthSession } from "@/src/server/auth";
+import { currentUser } from "@clerk/nextjs";
 import RecipePageComponent from "@components/templates/RecipePage/RecipePageComponent";
 import { db } from "@db/index";
 import { recipes as recipeSchema } from "@db/schemas";
@@ -15,17 +15,17 @@ interface PreviewRecipePageProps {
 export default async function PreviewRecipePage({
   params,
 }: PreviewRecipePageProps) {
-  const session = await getServerAuthSession();
-  if (!session) {
-    return redirect("/api/auth/login");
+  const user = await currentUser();
+  if (!user) {
+    return redirect("/auth/login");
   }
 
   const recipe = await db.query.recipes.findFirst({
     with: { info: true },
     where: and(
       or(
-        eq(recipeSchema.lastUpdatedBy, session.user.id),
-        eq(recipeSchema.createdBy, session.user.id)
+        eq(recipeSchema.lastUpdatedBy, user.id),
+        eq(recipeSchema.createdBy, user.id)
       ),
       eq(recipeSchema.uid, params.id)
     ),

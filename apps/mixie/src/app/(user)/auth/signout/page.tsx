@@ -1,8 +1,14 @@
+"use client";
 import { Button } from "@/src/common/components/ui/button";
+import { useClerk } from "@clerk/nextjs";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
+  const { signOut } = useClerk();
+  const router = useRouter();
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -13,9 +19,12 @@ const LoginPage = () => {
           height={128}
           className="h-32 w-32 rounded-full"
         />
-        <h1 className="text-step--1">Signout of Meally</h1>
+        <h1 className="text-step--1">Signout of Mixie</h1>
       </div>
-      <Button ariaLabel="singout of meally" onClick={() => signOut()}>
+      <Button
+        ariaLabel="singout of mixie"
+        onClick={() => signOut(() => router.push("/"))}
+      >
         Sign out
       </Button>
     </>

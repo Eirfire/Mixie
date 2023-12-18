@@ -1,6 +1,4 @@
 import { env } from "@/env.mjs";
-import { authOptions } from "@server/auth";
-import { getServerAuthSession } from "@server/auth";
 import type { NextRequest } from "next/server";
 
 export const isApp = async (req: NextRequest) => {
@@ -19,14 +17,4 @@ export const isApp = async (req: NextRequest) => {
   }
 
   return false;
-};
-
-export const isAuthenticated = async (req: NextRequest) => {
-  const session = await getServerAuthSession();
-
-  if (!session) {
-    return false;
-  }
-
-  return true;
 };

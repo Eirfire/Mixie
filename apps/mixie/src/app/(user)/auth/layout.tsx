@@ -1,17 +1,15 @@
-import { getServerAuthSession } from "@/src/server/auth";
-import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import React from "react";
-import Image from "next/image";
 
 export default async function SettingsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerAuthSession();
+  const user = await currentUser();
 
-  if (session) {
+  if (user) {
     return redirect("/");
   }
 

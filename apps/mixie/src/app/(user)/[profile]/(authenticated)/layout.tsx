@@ -1,4 +1,4 @@
-import { getServerAuthSession } from "@/src/server/auth";
+import { currentUser } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -13,9 +13,9 @@ export default async function UserLayout({
   children: React.ReactNode;
   params: SettingsParams;
 }) {
-  const session = await getServerAuthSession();
+  const user = await currentUser();
 
-  if (session?.user.id != params.profile) return notFound();
+  if (user!.id != params.profile) return notFound();
 
   return <main className="h-full w-full">{children}</main>;
 }

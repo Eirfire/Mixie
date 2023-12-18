@@ -1,5 +1,5 @@
 import { isApp } from "@/src/common/lib/services/apiMiddleware";
-import { getServerAuthSession } from "@/src/server/auth";
+import { auth, currentUser } from "@clerk/nextjs";
 import { db } from "@db/index";
 import { users } from "@db/schemas";
 import { userSchema } from "@db/zodSchemas";
@@ -13,11 +13,11 @@ export async function PUT(
 ) {
   try {
     const app = await isApp(req);
-    const session = await getServerAuthSession();
+    const { user } = await auth();
 
-    const requestedUserData = session?.user.id === params.id;
+    const requestedUserData = user!.id === params.id;
 
-    if ((!app || !session) && !requestedUserData) {
+    if ((!app || !user) && !requestedUserData) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
 

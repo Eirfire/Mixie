@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 // import { StarIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from "lucide-react";
-import useUser from "@/src/common/hooks/useUser";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +15,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Rating } from "@db/types";
 import toast from "react-hot-toast";
+import { useUser } from "@clerk/nextjs";
 
 interface StarRatingProps {
   recipeId: string;
@@ -88,7 +88,7 @@ const StarRating = ({ recipeId, rating }: StarRatingProps) => {
               </DialogDescription>
             </DialogHeader>
             <Link
-              href={"/api/auth/signin"}
+              href={"/auth/login"}
               className="flex h-10 items-center justify-center rounded-md bg-yellow px-4 py-2 text-step--2 font-semibold text-black"
             >
               Login

@@ -1,9 +1,9 @@
 "use client";
 import { cn } from "@lib/utils";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { CardProps, BookmarkButton, RecipeImage } from "./CardUtils";
+import { currentUser, useSession } from "@clerk/nextjs";
 
 interface BaseCardProps extends CardProps {
   hasCookTime?: boolean;
@@ -24,7 +24,7 @@ export const BaseCard = ({
   hasCookTime = true,
   classNames,
 }: BaseCardProps) => {
-  const { data: session } = useSession();
+  const session = useSession();
 
   return (
     <div

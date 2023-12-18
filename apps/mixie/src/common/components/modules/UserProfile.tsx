@@ -14,18 +14,18 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import useUser from "../../hooks/useUser";
 import CreateRecipeDialog from "../elements/CreateRecipeDialog";
+import { useUser } from "@clerk/nextjs";
 
 const UserProfile = () => {
-  const { session, user } = useUser();
+  const {user} = useUser();
   const [open, setOpen] = useState(false);
 
   if (!user) {
     return (
       <Link
         onClick={() => setOpen}
-        href={"/api/auth/signin"}
+        href={"/auth/login"}
         className="rounded-md bg-yellow p-1 px-2 font-semibold text-black"
       >
         Login
@@ -40,7 +40,7 @@ const UserProfile = () => {
           width={42}
           height={42}
           src={
-            user?.image ||
+            user?.imageUrl ||
             "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
           alt="user profile picture"
@@ -83,7 +83,7 @@ const UserProfile = () => {
         </Link>
         <Link
           onClick={() => setOpen(false)}
-          href={"/api/auth/signout"}
+          href={"/auth/signout"}
           className="flex flex-row gap-1"
         >
           {" "}

@@ -1,6 +1,5 @@
 import { env } from "@/env.mjs";
 import { HeartIcon } from "lucide-react";
-import { Session } from "next-auth";
 import toast from "react-hot-toast";
 import Image, { type ImageProps } from "next/image";
 import { cn } from "@/src/common/lib/utils";
@@ -51,7 +50,7 @@ export const BookmarkButton = ({
   session,
   recipe,
 }: {
-  session: Session | null;
+  session: any | null;
   recipe: CardRecipe;
 }) => {
   if (!session) return null;

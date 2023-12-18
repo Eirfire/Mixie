@@ -13,12 +13,12 @@ import { Button } from "@components/ui/button";
 import Link from "next/link";
 
 import { Input } from "@components/ui/input";
-import useUser from "../../hooks/useUser";
 import { useForm } from "react-hook-form";
 import { register } from "module";
 import { Textarea } from "@components/ui/textarea";
 import { LetterSpacingIcon } from "@radix-ui/react-icons";
 import toast from "react-hot-toast";
+import { useUser } from "@clerk/nextjs";
 
 type FeedbackType = "bug" | "feature" | "other";
 
@@ -46,8 +46,8 @@ const FeedbackDialog = () => {
   const { handleSubmit, getValues, setValue, control } =
     useForm<FeedbackDialogForm>({
       defaultValues: {
-        name: user?.name || "",
-        email: user?.email,
+        name: user?.fullName || "",
+        email: user?.emailAddresses[0].emailAddress || "",
       },
     });
 

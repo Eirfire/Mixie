@@ -14,8 +14,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useToggleWithShortcut } from "../../hooks/useToggleWithShortCut";
-import useUser from "../../hooks/useUser";
 import CreateRecipeDialog from "../elements/CreateRecipeDialog";
+import { useUser } from "@clerk/nextjs";
 
 interface SearchProps {
   externalOpen?: boolean;
@@ -128,7 +128,7 @@ export function Search({ externalOpen, setExternalOpen }: SearchProps) {
                   id="5"
                   onKeyUp={handleKeyUp}
                   onClick={() => setDialogOpen(false)}
-                  href={"/api/auth/signout"}
+                  href={"/auth/signout"}
                   className="flex flex-row gap-1"
                 >
                   {" "}

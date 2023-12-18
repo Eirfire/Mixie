@@ -1,5 +1,5 @@
 "use client";
-import useUser from "@/src/common/hooks/useUser";
+import { useUser } from "@clerk/nextjs";
 import type { Info } from "@db/types";
 import { AlarmClock, Clock, PencilIcon, PieChart, Timer } from "lucide-react";
 import Link from "next/link";
@@ -10,12 +10,11 @@ interface InfoProps {
 }
 
 const Info = ({ info }: InfoProps) => {
-  const session = useUser();
+  const { user } = useUser();
   const pathName = usePathname();
 
   const showEdit =
-    (session?.user?.id === info?.createdBy ||
-      session?.user?.id === info?.lastUpdatedBy) &&
+    (user?.id === info?.createdBy || user?.id === info?.lastUpdatedBy) &&
     !pathName.includes("edit");
 
   return (

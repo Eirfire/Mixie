@@ -1,12 +1,12 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@components/modules/Footer";
 import Navbar from "@components/modules/Navbar";
 import Providers from "@components/modules/Providers";
-import { Toaster } from "react-hot-toast";
 import { constructMetadata } from "@lib/utils";
 import "@styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Viewport } from "next";
-import { getServerAuthSession } from "@server/auth";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = constructMetadata();
 
@@ -23,26 +23,33 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Providers>
-          <Navbar />
-          {children}
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "#333 ",
-                color: "white",
-              },
-            }}
-          />
-          <Footer />
-        </Providers>
+    <ClerkProvider
+      afterSignInUrl="/"
+      afterSignUpUrl="/"
+      signInUrl="/auth/login"
+      signUpUrl="/auth/login"
+    >
+      <html lang="en">
+        <body>
+          <Providers>
+            <Navbar />
+            {children}
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: "#333 ",
+                  color: "white",
+                },
+              }}
+            />
+            <Footer />
+          </Providers>
 
-        {/*Have a look at https://posthog.com/ for more advanced analytics */}
-        <Analytics />
-      </body>
-    </html>
+          {/*Have a look at https://posthog.com/ for more advanced analytics */}
+          <Analytics />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

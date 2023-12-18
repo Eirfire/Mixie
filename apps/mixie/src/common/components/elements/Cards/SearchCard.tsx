@@ -1,8 +1,7 @@
 "use client";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { BookmarkButton, CardProps, RecipeImage } from "./CardUtils";
+import { useSession } from "@clerk/nextjs";
 
 interface SearchCardProps extends CardProps {
   as: "li" | "div" | "article" | "section";
@@ -10,7 +9,7 @@ interface SearchCardProps extends CardProps {
 }
 
 export const SearchCard = ({ as, edit = false, recipe }: SearchCardProps) => {
-  const { data: session } = useSession();
+  const session = useSession();
 
   const Tag = as;
   return (

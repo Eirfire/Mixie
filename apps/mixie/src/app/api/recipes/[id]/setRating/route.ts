@@ -1,15 +1,15 @@
+import { auth, currentUser } from "@clerk/nextjs";
 import { db } from "@db/index";
 import { ratings } from "@db/schemas";
 import { ratingsSchema } from "@db/zodSchemas";
-import { getServerAuthSession } from "@server/auth";
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 
 export async function POST(req: NextRequest, params: { id: string }) {
   try {
-    const session = await getServerAuthSession();
+    const { user } = await auth();
 
-    if (!session) {
+    if (!user) {
       return NextResponse.json("Unauthorized", { status: 401 });
     }
 

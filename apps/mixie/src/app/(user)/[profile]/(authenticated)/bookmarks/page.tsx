@@ -1,12 +1,12 @@
 import { SearchCard } from "@/src/common/components/elements/Cards";
 import { db } from "@db/index";
-import { getServerAuthSession } from "@server/auth";
+import { currentUser } from "@clerk/nextjs";
 import { notFound } from "next/navigation";
 
 export default async function BookmarksPage() {
-  const session = await getServerAuthSession();
+  const user = await currentUser();
 
-  if (!session?.user) {
+  if (!user) {
     return notFound();
   }
 

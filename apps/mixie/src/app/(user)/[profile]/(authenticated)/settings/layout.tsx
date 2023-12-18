@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import { cva } from "class-variance-authority";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { Button } from "@/src/common/components/ui/button";
 
 interface SettingsParams {
