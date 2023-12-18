@@ -7,6 +7,7 @@ import "@styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Viewport } from "next";
 import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = constructMetadata();
 
@@ -48,6 +49,7 @@ export default async function RootLayout({
 
           {/*Have a look at https://posthog.com/ for more advanced analytics */}
           <Analytics />
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>

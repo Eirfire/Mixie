@@ -110,11 +110,7 @@ export async function POST(req: NextRequest) {
           createdBy: user.id,
           lastUpdatedBy: user.id,
           lastUpdatedByName: user.firstName! || "",
-          description:
-            recipe.description.replace(
-              /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g,
-              ""
-            ) || null,
+          description: recipe.description.replace(/<[^>]*>?/gm, "") || null,
           isPublic: false,
           steps:
             recipe.recipeInstructions.map((step: string) => {
