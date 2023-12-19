@@ -1,9 +1,9 @@
-"use client";
+"use client"
 import { Button } from "@/src/common/components/ui/button";
 import { useClerk } from "@clerk/nextjs";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const { signOut } = useClerk();

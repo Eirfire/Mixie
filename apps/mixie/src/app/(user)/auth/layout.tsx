@@ -1,5 +1,3 @@
-import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function SettingsLayout({
@@ -7,11 +5,6 @@ export default async function SettingsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await currentUser();
-
-  if (user) {
-    return redirect("/");
-  }
 
   return (
     <main className="h-full w-full">

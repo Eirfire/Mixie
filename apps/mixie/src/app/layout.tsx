@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Viewport } from "next";
 import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { env } from "@/env.mjs";
 
 export const metadata = constructMetadata();
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
 }) {
   return (
     <ClerkProvider
+      publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
       afterSignInUrl="/"
       afterSignUpUrl="/"
       signInUrl="/auth/login"

@@ -35,20 +35,20 @@ const LoginPage = () => {
   const signInWith = (strategy: OAuthStrategy) => {
     return signIn!.authenticateWithRedirect({
       strategy,
-      redirectUrl: "/sso-callback",
+      redirectUrl: "/auth/sso-callback",
       redirectUrlComplete: "/",
     });
   };
 
-  const signInWithGithub = async () => {
+  const signInWithGithub = () => {
     signInWith("oauth_github");
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = () => {
     signInWith("oauth_google");
   };
 
-  const signInWithFacebook = async () => {
+  const signInWithFacebook = () => {
     signInWith("oauth_facebook");
   };
 

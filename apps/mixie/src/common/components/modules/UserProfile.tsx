@@ -24,7 +24,6 @@ const UserProfile = () => {
   if (!user) {
     return (
       <Link
-        onClick={() => setOpen}
         href={"/auth/login"}
         className="rounded-md bg-yellow p-1 px-2 font-semibold text-black"
       >
