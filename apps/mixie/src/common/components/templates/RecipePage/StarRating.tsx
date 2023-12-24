@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Rating } from "@db/types";
 import toast from "react-hot-toast";
+import { useUser } from "@clerk/nextjs";
 
 interface StarRatingProps {
   recipeId: string;

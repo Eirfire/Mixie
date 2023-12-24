@@ -1,7 +1,6 @@
 "use client";
 
 import { UserProfile } from "@clerk/nextjs";
-("use client");
 import { env } from "@/env.mjs";
 import { Button } from "@/src/common/components/ui/button";
 import toast from "react-hot-toast";

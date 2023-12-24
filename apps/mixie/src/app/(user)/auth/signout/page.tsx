@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/src/common/components/ui/button";
 import { useClerk } from "@clerk/nextjs";
 import { signOut } from "next-auth/react";
@@ -22,7 +22,7 @@ const LoginPage = () => {
         <h1 className="text-step--1">Signout of Mixie</h1>
       </div>
       <Button
-        ariaLabel="singout of mixie"
+        aria-label="singout of mixie"
         onClick={() => signOut(() => router.push("/"))}
       >
         Sign out
