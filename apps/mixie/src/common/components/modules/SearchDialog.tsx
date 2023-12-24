@@ -14,8 +14,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useToggleWithShortcut } from "../../hooks/useToggleWithShortCut";
+import useUser from "../../hooks/useUser";
 import CreateRecipeDialog from "../elements/CreateRecipeDialog";
-import { useUser } from "@clerk/nextjs";
 import { createUrl } from "../../lib/utils";
 
 interface SearchProps {

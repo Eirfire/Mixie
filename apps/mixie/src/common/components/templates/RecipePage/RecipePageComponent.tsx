@@ -29,7 +29,7 @@ const RecipePageComponent = ({ recipe }: RecipePageComponentProps) => {
         <Info info={recipe.info} />
         <div className="w-full">
           <Image
-            src={recipe?.info.imgUrl || "/images/placeholder.png"}
+            src={recipe?.info.imgUrl || "/images/placeholder.webp"}
             alt={recipe?.info.imgAlt || recipe.title || "recipe image"}
             width={800}
             height={600}
@@ -77,7 +77,7 @@ const RecipePageComponent = ({ recipe }: RecipePageComponentProps) => {
             <p className="italic">{recipe.notes}</p>
           </div>
         )}
-        <span className="my-2 mb-4 h-[0.125rem] w-full rounded-md bg-grey dark:bg-white md:w-[800px]" />
+        <span className="my-2 mb-4 h-[0.125rem] w-full rounded-md bg-grey md:w-[800px] dark:bg-white" />
         <Details
           ingredients={recipe.ingredients || []}
           steps={recipe.steps || []}

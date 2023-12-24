@@ -1,14 +1,15 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "@components/modules/Footer";
-import Navbar from "@components/modules/Navbar";
-import Providers from "@components/modules/Providers";
+import { Toaster } from "react-hot-toast";
 import { constructMetadata } from "@lib/utils";
 import "@styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Viewport } from "next";
-import { Toaster } from "react-hot-toast";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { env } from "@/env.mjs";
+import dynamic from "next/dynamic";
+
+const Providers = dynamic(() => import("@components/modules/Providers"));
+const Navbar = dynamic(() => import("@components/modules/Navbar"));
+const Footer = dynamic(() => import("@components/modules/Footer"));
 
 export const metadata = constructMetadata();
 
@@ -25,32 +26,27 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    
-    >
-      <html lang="en">
-        <body>
-          <Providers>
-            <Navbar />
-            {children}
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                style: {
-                  background: "#333 ",
-                  color: "white",
-                },
-              }}
-            />
-            <Footer />
-          </Providers>
+    <html lang="en">
+      <body>
+        <Providers>
+          <Navbar />
+          {children}
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              style: {
+                background: "#333 ",
+                color: "white",
+              },
+            }}
+          />
+          <Footer />
+        </Providers>
 
-          {/*Have a look at https://posthog.com/ for more advanced analytics */}
-          <Analytics />
-          <SpeedInsights />
-        </body>
-      </html>
-    </ClerkProvider>
+        {/*Have a look at https://posthog.com/ for more advanced analytics */}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

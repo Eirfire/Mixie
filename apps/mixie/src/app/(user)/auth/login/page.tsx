@@ -54,6 +54,7 @@ const LoginPage = () => {
 
   return (
     <>
+    <>
       <div className="flex flex-col items-center">
         <Image
           src="/icons/icon.jpg"
@@ -62,6 +63,7 @@ const LoginPage = () => {
           height={128}
           className="h-32 w-32 rounded-full"
         />
+        <h1 className="text-step--1">Welcome to Mixie</h1>
         <h1 className="text-step--1">Welcome to Mixie</h1>
       </div>
       {/* <form
@@ -135,7 +137,7 @@ const LoginPage = () => {
     <span className="my-2 mb-4 h-[0.125rem] w-3/4 rounded-md bg-grey dark:bg-white"></span> */}
       <div className="flex flex-col gap-4">
         <Button
-          ariaLabel="sign in with google"
+          aria-label="sign in with google"
           LeadingIcon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -188,41 +190,12 @@ const LoginPage = () => {
               </g>
             </svg>
           }
-          ariaLabel="sign in with github"
+          aria-label="sign in with github"
           className="color-white shadow-[0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)] flex w-56 max-w-sm cursor-pointer items-center  rounded-lg border-none bg-[#181717] px-2 py-6 text-center text-step--3"
           onClick={() => signInWithGithub()}
         >
           <p className="text-white">Sign in with Github</p>
         </Button>
-        {/* <Button
-          LeadingIcon={
-            <svg
-              stroke="#ffffff"
-              viewBox="-143 145 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-              id="Layer_1"
-              version="1.1"
-              fill="#ffffff"
-              className="h-8"
-            >
-              <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                id="SVGRepo_tracerCarrier"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <path d="M329,145h-432c-22.1,0-40,17.9-40,40v432c0,22.1,17.9,40,40,40h432c22.1,0,40-17.9,40-40V185C369,162.9,351.1,145,329,145z M169.5,357.6l-2.9,38.3h-39.3v133H77.7v-133H51.2v-38.3h26.5v-25.7c0-11.3,0.3-28.8,8.5-39.7c8.7-11.5,20.6-19.3,41.1-19.3 c33.4,0,47.4,4.8,47.4,4.8l-6.6,39.2c0,0-11-3.2-21.3-3.2c-10.3,0-19.5,3.7-19.5,14v29.9H169.5z"></path>{" "}
-              </g>
-            </svg>
-          }
-          ariaLabel="sign in with facebook"
-          className="flex w-56 max-w-sm cursor-pointer items-center gap-2 rounded-lg bg-[#039be5] bg-gradient-to-tr from-[#0163E0] to-[#18ACFE] px-2 py-6 text-center text-step--3 text-white"
-          onClick={() => signInWithFacebook()}
-        >
-          Sign in with Facebook
-        </Button> */}
       </div>
     </>
   );
