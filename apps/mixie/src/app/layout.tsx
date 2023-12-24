@@ -27,10 +27,7 @@ export default async function RootLayout({
   return (
     <ClerkProvider
       publishableKey={env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      afterSignInUrl="/"
-      afterSignUpUrl="/"
-      signInUrl="/auth/login"
-      signUpUrl="/auth/login"
+    
     >
       <html lang="en">
         <body>

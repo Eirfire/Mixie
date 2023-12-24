@@ -75,6 +75,7 @@
     "resend": "^2.0.0",
     "sharp": "^0.33.1",
     "superjson": "^2.2.1",
+    "svix": "^1.15.0",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.1.0",

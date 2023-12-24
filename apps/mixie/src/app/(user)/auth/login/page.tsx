@@ -36,8 +36,8 @@ const LoginPage = () => {
     return signIn!.authenticateWithRedirect({
       strategy,
       redirectUrl: "/auth/sso-callback",
-      redirectUrlComplete: "/",
-    });
+      redirectUrlComplete: "/",  
+    }).then((res => console.log('Return ', res)));
   };
 
   const signInWithGithub = () => {
