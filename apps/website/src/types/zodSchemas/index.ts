@@ -1,6 +1,7 @@
 import * as z from "zod";
 export * from "./recipes";
 export * from "./enums";
+export * from './blog-documents'
 
 const feedbackType = z.enum(["bug", "feature", "other"]);
 

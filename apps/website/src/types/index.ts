@@ -8,10 +8,16 @@ import {
   ratingsSchema,
   recipeFormSchema,
   recipeSchema,
-  stepSchema
+  stepSchema,
 } from "./zodSchemas/recipes";
+import {
+  blogSchema,
+  blogEditSchema,
+  documentSchema,
+  documentEditSchema,
+} from "./zodSchemas/blog-documents";
 
-export * from "./zodSchemas/recipes";
+export * from "./zodSchemas";
 
 //recipes
 export type Recipe = z.infer<typeof recipeSchema>;
@@ -38,3 +44,9 @@ export type Bookmark = z.infer<typeof bookmarksWithLinkSchema>;
 export type Collection = z.infer<typeof collectionSchema>;
 
 export type RecipeCreationType = z.infer<typeof recipe_creation_type>;
+
+// blogs / documents
+export type Blog = z.infer<typeof blogSchema>;
+export type NewBlog = z.infer<typeof blogEditSchema>;
+export type Document = z.infer<typeof documentSchema>;
+export type NewDocument = z.infer<typeof documentEditSchema>;

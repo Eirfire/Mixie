@@ -9,6 +9,56 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      blog: {
+        Row: {
+          author_id: string;
+          blog_id: string;
+          blog_type: Database["public"]["Enums"]["blog_type"];
+          content: string;
+          created_at: string;
+          image_alt: string | null;
+          image_url: string | null;
+          published: boolean;
+          tags: string[] | null;
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          author_id: string;
+          blog_id?: string;
+          blog_type?: Database["public"]["Enums"]["blog_type"];
+          content: string;
+          created_at?: string;
+          image_alt?: string | null;
+          image_url?: string | null;
+          published?: boolean;
+          tags?: string[] | null;
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          author_id?: string;
+          blog_id?: string;
+          blog_type?: Database["public"]["Enums"]["blog_type"];
+          content?: string;
+          created_at?: string;
+          image_alt?: string | null;
+          image_url?: string | null;
+          published?: boolean;
+          tags?: string[] | null;
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "blog_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       bookmark_link: {
         Row: {
           bookmark_id: string;
@@ -148,6 +198,33 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      documents: {
+        Row: {
+          content: string;
+          created_at: string;
+          document_id: string;
+          document_type: Database["public"]["Enums"]["document_type"];
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          content: string;
+          created_at?: string;
+          document_id?: string;
+          document_type: Database["public"]["Enums"]["document_type"];
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          content?: string;
+          created_at?: string;
+          document_id?: string;
+          document_type?: Database["public"]["Enums"]["document_type"];
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
       feedback: {
         Row: {
@@ -374,6 +451,31 @@ export type Database = {
       };
     };
     Views: {
+      blog_view: {
+        Row: {
+          author_id: string | null;
+          author_meta: Json | null;
+          blog_id: string | null;
+          blog_type: Database["public"]["Enums"]["blog_type"] | null;
+          content: string | null;
+          created_at: string | null;
+          image_alt: string | null;
+          image_url: string | null;
+          published: boolean | null;
+          tags: string[] | null;
+          title: string | null;
+          updated_at: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "blog_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       bookmarks_view: {
         Row: {
           bookmark_id: string | null;
@@ -432,6 +534,7 @@ export type Database = {
         | "60_to_90"
         | "90_to_120"
         | "more_than_120";
+      blog_type: "blog" | "release" | "announcement" | "event";
       diet:
         | "none"
         | "vegetarian"
@@ -451,6 +554,7 @@ export type Database = {
         | "nut_free"
         | "egg_free";
       difficulty_level: "not_set" | "easy" | "medium" | "hard";
+      document_type: "privacy_policy" | "terms_of_service";
       feedback_type: "feature" | "bug" | "other";
       fonts: "default" | "open_dyslexic" | "monospace" | "serif" | "sans_serif";
       loveCooking:

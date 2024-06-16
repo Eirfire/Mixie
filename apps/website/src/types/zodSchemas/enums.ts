@@ -4,30 +4,11 @@ export const recipe_creation_type = z
   .enum(["title", "image", "link", "upload"])
   .default("title");
 
-export const unit = z
-  .enum([
-    "not_set",
-    "grams",
-    "kg",
-    "cup",
-    "ml",
-    "litre",
-    "tsp",
-    "tbsp",
-    "pinch",
-    "item",
-    "handful",
-    "slice",
-    "piece",
-    "can",
-    "bunch",
-    "bottle",
-  ])
-  .default("not_set");
+export const blog_type = z
+  .enum(["blog", "release", "announcement", "event"])
+  .default("blog");
 
-export const amount = z
-  .enum(["not_set", "1/8", "1/2", "1/3", "2/3", "1/4", "3/4"])
-  .default("not_set");
+export const document_type = z.enum(["privacy_policy", "terms_of_service"]);
 
 export const difficulty_level = z
   .enum(["not_set", "easy", "medium", "hard"])
@@ -57,9 +38,11 @@ export const mealTime = z
 // auth
 
 export const theme = z.enum(["system", "light", "dark"]).default("system");
+
 export const fonts = z
   .enum(["default", "open_dyslexic", "monospace", "serif", "sans_serif"])
   .default("default");
+
 export const diet = z
   .enum([
     "none",
