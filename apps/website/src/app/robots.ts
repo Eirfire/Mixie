@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/auth"],
+      disallow: ["/auth", "/admin", "/recipes/preview"],
     },
     sitemap: [
       "https://www.mixiecooking.com/sitemap.xml",

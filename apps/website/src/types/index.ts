@@ -1,4 +1,10 @@
+import { Tables } from "database.types";
 import { z } from "zod";
+import { profileEditSchema } from "./zodSchemas";
+import {
+  blogEditSchema,
+  documentEditSchema
+} from "./zodSchemas/blog-documents";
 import { recipe_creation_type } from "./zodSchemas/enums";
 import {
   bookmarksWithLinkSchema,
@@ -10,14 +16,6 @@ import {
   recipeSchema,
   stepSchema,
 } from "./zodSchemas/recipes";
-import {
-  blogSchema,
-  blogEditSchema,
-  documentSchema,
-  documentEditSchema,
-} from "./zodSchemas/blog-documents";
-import { Tables } from "database.types";
-import { profileEditSchema } from "./zodSchemas";
 
 export * from "./zodSchemas";
 

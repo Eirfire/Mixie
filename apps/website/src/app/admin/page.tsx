@@ -1,24 +1,35 @@
+import BlogCard from "@/components/cards/blog";
+import BlogEditor from "@/components/layouts/blog-creation/blog";
+import CreateBlogModal from "@/components/layouts/blog-creation/create-blog-modal";
 import { getUser } from "@/lib/utils/getUser";
 import { createClient } from "@/server/supabase/server";
+import { blogSchema } from "@/types";
 import React from "react";
 
 const AdminPage = async () => {
-  const user = await getUser();
   const supabase = createClient();
+  const { data: blogs } = await supabase.from("blog").select("*");
 
-  if (!user) return <div>You are not an admin</div>;
-
-  const { data: userProfile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("profile_id", user.id)
-    .single();
-
-  if (userProfile && userProfile.user_role !== "admin") {
-    return <div>Your role is not an admin</div>;
-  }
-
-  return <div>AdminPage</div>;
+  return (
+    <div className="flex flex-col items-center justify-center h-screen">
+      AdminPage
+      <div>
+        <h2>Blogs</h2>
+        <div>
+          {blogs && blogs?.length > 0 ? (
+            blogs?.map((blog) => (
+              <BlogCard blog={blog} edit={true} key={blog.blog_id} />
+            ))
+          ) : (
+            <>
+              <div>No blogs found</div>
+              <CreateBlogModal />
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AdminPage;

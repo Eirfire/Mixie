@@ -154,7 +154,7 @@ const FeedbackDialog = ({
         <DialogHeader>
           <DialogTitle>Feedback</DialogTitle>
           <DialogDescription>
-            Make BuzzTrip better by providing feedback
+            Provide feedback to the Mixie team
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
