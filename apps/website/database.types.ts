@@ -267,6 +267,56 @@ export type Database = {
           },
         ];
       };
+      profiles: {
+        Row: {
+          bio: string | null;
+          created_at: string;
+          email: string | null;
+          first_name: string | null;
+          full_name: string | null;
+          last_name: string | null;
+          profile_id: string;
+          profile_picture: string | null;
+          updated_at: string;
+          user_name: string | null;
+          user_role: Database["public"]["Enums"]["user_role"];
+        };
+        Insert: {
+          bio?: string | null;
+          created_at?: string;
+          email?: string | null;
+          first_name?: string | null;
+          full_name?: string | null;
+          last_name?: string | null;
+          profile_id: string;
+          profile_picture?: string | null;
+          updated_at?: string;
+          user_name?: string | null;
+          user_role?: Database["public"]["Enums"]["user_role"];
+        };
+        Update: {
+          bio?: string | null;
+          created_at?: string;
+          email?: string | null;
+          first_name?: string | null;
+          full_name?: string | null;
+          last_name?: string | null;
+          profile_id?: string;
+          profile_picture?: string | null;
+          updated_at?: string;
+          user_name?: string | null;
+          user_role?: Database["public"]["Enums"]["user_role"];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_profile_id_fkey";
+            columns: ["profile_id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       ratings: {
         Row: {
           rating: number;
@@ -591,6 +641,7 @@ export type Database = {
         | "can"
         | "bunch"
         | "bottle";
+      user_role: "user" | "admin";
     };
     CompositeTypes: {
       [_ in never]: never;

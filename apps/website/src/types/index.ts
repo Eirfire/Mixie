@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { amount, recipe_creation_type } from "./zodSchemas/enums";
+import { recipe_creation_type } from "./zodSchemas/enums";
 import {
   bookmarksWithLinkSchema,
   collectionSchema,
@@ -16,6 +16,8 @@ import {
   documentSchema,
   documentEditSchema,
 } from "./zodSchemas/blog-documents";
+import { Tables } from "database.types";
+import { profileEditSchema } from "./zodSchemas";
 
 export * from "./zodSchemas";
 
@@ -27,8 +29,6 @@ export type image_attributes = z.infer<typeof image_attributesSchema>;
 
 // ingredients
 export type Ingredient = z.infer<typeof ingredientSchema>;
-
-export type Amount = z.infer<typeof amount>;
 
 export type Step = z.infer<typeof stepSchema>;
 
@@ -45,8 +45,12 @@ export type Collection = z.infer<typeof collectionSchema>;
 
 export type RecipeCreationType = z.infer<typeof recipe_creation_type>;
 
+// users
+export type Profile = Tables<"profiles">;
+export type NewProfile = z.infer<typeof profileEditSchema>;
+
 // blogs / documents
-export type Blog = z.infer<typeof blogSchema>;
+export type Blog = Tables<"blog">;
 export type NewBlog = z.infer<typeof blogEditSchema>;
-export type Document = z.infer<typeof documentSchema>;
+export type Document = Tables<"documents">;
 export type NewDocument = z.infer<typeof documentEditSchema>;

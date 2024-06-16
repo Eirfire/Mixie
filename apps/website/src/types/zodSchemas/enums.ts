@@ -4,6 +4,10 @@ export const recipe_creation_type = z
   .enum(["title", "image", "link", "upload"])
   .default("title");
 
+export const feedbackType = z.enum(["bug", "feature", "other"]);
+
+export const user_role = z.enum(["user", "admin"]);
+
 export const blog_type = z
   .enum(["blog", "release", "announcement", "event"])
   .default("blog");
