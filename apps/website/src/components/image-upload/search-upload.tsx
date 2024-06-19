@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { recipeClientFormSchema } from "@/types/zodSchemas";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env";
 import Image from "next/image";
@@ -11,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { createApi } from "unsplash-js";
 import * as z from "zod";
+import { ImagedUploadSchema } from "./form";
 
 const api = createApi({
   accessKey: env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
@@ -33,8 +33,8 @@ const SearchUpload = () => {
     },
   });
 
-  const { setValue, watch } =
-    useFormContext<z.infer<typeof recipeClientFormSchema>>();
+  const { setValue, watch, formState: { isDirty } } =
+    useFormContext<z.infer<ImagedUploadSchema>>();
 
   useEffect(() => {
     refetchImages();

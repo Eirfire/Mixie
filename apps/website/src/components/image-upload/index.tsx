@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { env } from "env";
+import { cn } from "@/lib/utils";
 import {
   Edit2,
   LinkIcon,
@@ -17,32 +17,35 @@ import {
   SearchIcon,
   UploadIcon,
 } from "lucide-react";
-import { useState } from "react";
-import { createApi } from "unsplash-js";
-import { HeaderControls } from "../../../header-controls";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { HeaderControls } from "../header-controls";
+import { ImageUploadType, ImagedUploadSchema } from "./form";
 import SearchUpload from "./search-upload";
 import UrlUpload from "./url-upload";
 import Upload from "./user-upload";
-import { useFormContext } from "react-hook-form";
-import { recipeClientFormSchema } from "@/types";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import * as z from "zod";
-import Link from "next/link";
+import { z } from "zod";
 
-type ImageUploadType = "url" | "upload" | "search";
-
-const ImageUpload = () => {
+/**
+ * Needs to be created in a form context with the form schema containing:
+ * @param image_url - image url
+ * @param image_attributes - image attributes
+ * @returns Image upload component
+ */
+export default function ImageUpload() {
   const [uploadType, setUploadType] = useState<ImageUploadType | null>(null);
 
   const {
-    register,
-    setValue,
-    getValues,
     watch,
-    control,
-    formState: { errors },
-  } = useFormContext<z.infer<typeof recipeClientFormSchema>>();
+    formState: { isDirty, errors },
+  } = useFormContext<z.infer<ImagedUploadSchema>>();
+
+  useEffect(() => {
+    // used to activate isDirty state
+    console.log("isDirty", isDirty);
+  }, [isDirty]);
 
   const image = watch("image_url");
   const image_attributes = watch("image_attributes");
@@ -174,6 +177,4 @@ const ImageUpload = () => {
       </Dialog>
     </div>
   );
-};
-
-export default ImageUpload;
+}

@@ -8,19 +8,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { recipeClientFormSchema } from "@/types/zodSchemas";
 import { useFormContext } from "react-hook-form";
 import * as z from "zod";
+import { ImagedUploadSchema } from "./form";
 
 const UrlUpload = () => {
   const {
-    register,
-    setValue,
-    getValues,
-    watch,
     control,
-    formState: { errors },
-  } = useFormContext<z.infer<typeof recipeClientFormSchema>>();
+    formState: { errors, isDirty },
+  } = useFormContext<z.infer<ImagedUploadSchema>>();
 
   return (
     <>

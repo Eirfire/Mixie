@@ -23,7 +23,7 @@ export * from "./zodSchemas";
 export type Recipe = z.infer<typeof recipeSchema>;
 export type NewRecipe = z.infer<typeof recipeFormSchema>;
 
-export type image_attributes = z.infer<typeof image_attributesSchema>;
+export type ImageAttributes = z.infer<typeof image_attributesSchema>;
 
 // ingredients
 export type Ingredient = z.infer<typeof ingredientSchema>;

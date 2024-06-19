@@ -9,20 +9,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UploadDropzone } from "@/lib/utils/uploadthing";
-import { recipeClientFormSchema } from "@/types/zodSchemas";
 import { useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
+import { ImagedUploadSchema } from "./form";
 
-const Upload = () => {
+export default function Upload() {
   const {
-    register,
     setValue,
-    getValues,
-    watch,
     control,
-    formState: { errors },
-  } = useFormContext<z.infer<typeof recipeClientFormSchema>>();
+    formState: { isDirty },
+  } = useFormContext<z.infer<ImagedUploadSchema>>();
 
   const setImages = (image: string) => {
     // setLoading(true);
@@ -72,6 +69,4 @@ const Upload = () => {
       />
     </>
   );
-};
-
-export default Upload;
+}

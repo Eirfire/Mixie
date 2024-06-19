@@ -16,7 +16,7 @@ export type Database = {
           blog_type: Database["public"]["Enums"]["blog_type"];
           content: string;
           created_at: string;
-          image_alt: string | null;
+          image_attributes: Json | null;
           image_url: string | null;
           published: boolean;
           tags: string[] | null;
@@ -29,7 +29,7 @@ export type Database = {
           blog_type?: Database["public"]["Enums"]["blog_type"];
           content: string;
           created_at?: string;
-          image_alt?: string | null;
+          image_attributes?: Json | null;
           image_url?: string | null;
           published?: boolean;
           tags?: string[] | null;
@@ -42,7 +42,7 @@ export type Database = {
           blog_type?: Database["public"]["Enums"]["blog_type"];
           content?: string;
           created_at?: string;
-          image_alt?: string | null;
+          image_attributes?: Json | null;
           image_url?: string | null;
           published?: boolean;
           tags?: string[] | null;
@@ -509,7 +509,7 @@ export type Database = {
           blog_type: Database["public"]["Enums"]["blog_type"] | null;
           content: string | null;
           created_at: string | null;
-          image_alt: string | null;
+          image_attributes: Json | null;
           image_url: string | null;
           published: boolean | null;
           tags: string[] | null;

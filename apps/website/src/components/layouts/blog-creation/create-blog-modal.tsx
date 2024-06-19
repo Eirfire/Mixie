@@ -1,5 +1,5 @@
 "use client";
-import { createBlog } from "@/actions/create-blog";
+import { createBlog } from "@/actions/blog/create-blog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,

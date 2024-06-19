@@ -1,11 +1,12 @@
 import * as z from "zod";
 import { document_type, blog_type } from "./enums";
+import { image_attributesSchema } from "./recipes";
 
 export const blogSchema = z.object({
   blog_id: z.string(),
   title: z.string(),
-  image_url: z.string(),
-  image_alt: z.string(),
+  image_url: z.string().url(),
+  image_attributes: image_attributesSchema,
   content: z.string(),
   tags: z.string().array().nullable(),
   blog_type: blog_type,
@@ -18,8 +19,8 @@ export const blogSchema = z.object({
 export const blogEditSchema = z.object({
   blog_id: z.string().optional(),
   title: z.string(),
-  image_url: z.string().nullish(),
-  image_alt: z.string().nullish(),
+  image_url: z.string().url().nullish(),
+  image_attributes: image_attributesSchema.nullish(),
   content: z.string().default(""),
   tags: z.string().array().nullish(),
   blog_type: blog_type,

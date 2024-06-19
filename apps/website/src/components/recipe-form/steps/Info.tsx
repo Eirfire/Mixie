@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import * as z from "zod";
 import { useRecipeContext } from "../recipe-form-provider";
 import { StepperFormActions } from "./shared";
-import ImageUpload from "../components/image-upload";
+import ImageUpload from "../../image-upload";
 import NumberInput from "@/components/ui/number-input";
 import { Button } from "@/components/ui/button";
 import { MinusIcon, PlusIcon } from "lucide-react";
@@ -59,6 +59,7 @@ const Info = () => {
     setInfo.status !== "idle" && setInfo.status !== "hasErrored";
 
   const onSubmit: SubmitHandler<z.infer<typeof infoSchema>> = (data) => {
+    console.log("onSubmit", data);
     if (isDirty) {
       setInfo.execute(data);
     } else {
