@@ -1,9 +1,11 @@
 "use client";
 import Editor from "@/components/editor";
 import { Input } from "@/components/ui/input";
-import { Blog } from "@/types";
+import { Blog, blogEditSchema } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { EditorInstance, JSONContent } from "novel";
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useDebouncedCallback } from "use-debounce";
 
 interface BlogEditorProps {
@@ -11,21 +13,30 @@ interface BlogEditorProps {
 }
 
 const BlogEditor = ({ blog }: BlogEditorProps) => {
-  const [content, setContent] = React.useState<JSONContent | undefined>(
-     undefined
+  const [content, setContent] = React.useState<string | undefined>(
+    undefined
   );
+  const { setValue, handleSubmit } = useForm({
+    resolver: zodResolver(blogEditSchema),
+    defaultValues: blog,
+  });
   const [saveStatus, setSaveStatus] = React.useState("Not saved");
 
-  const debouncedUpdates = useDebouncedCallback(async (value: JSONContent) => {
-    setContent(value);
+  const debouncedUpdates = useDebouncedCallback(async (editor: EditorInstance) => {
+    setContent(editor.getHTML());
     setSaveStatus("Saved Locally");
   }, 500);
 
+  const onSubmit = (data) => {};
+
   return (
-    <div className="md:w-1/2 w-full space-y-2 mx-auto">
+    <form
+      className="md:w-1/2 w-full space-y-2 mx-auto"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Input placeholder="Title" defaultValue={blog?.title ?? ""} />
-      <Editor initialValue={content} onChange={debouncedUpdates} />
-    </div>
+      <Editor onChange={debouncedUpdates} />
+    </form>
   );
 };
 

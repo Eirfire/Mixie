@@ -9,6 +9,7 @@ import {
   type JSONContent,
   EditorCommandList,
   EditorBubble,
+  type EditorInstance,
 } from "novel";
 import { ImageResizer, handleCommandNavigation } from "novel/extensions";
 import { defaultExtensions } from "./extensions";
@@ -26,7 +27,7 @@ const extensions = [...defaultExtensions, slashCommand];
 
 interface EditorProp {
   initialValue?: JSONContent;
-  onChange: (value: JSONContent) => void;
+  onChange: (editor: EditorInstance) => void;
 }
 const Editor = ({ initialValue, onChange }: EditorProp) => {
   const [openNode, setOpenNode] = useState(false);
@@ -37,7 +38,6 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
     <EditorRoot>
       <EditorContent
         className="border p-4 rounded-xl"
-        {...(initialValue && { initialContent: initialValue })}
         extensions={extensions}
         editorProps={{
           handleDOMEvents: {
@@ -51,7 +51,7 @@ const Editor = ({ initialValue, onChange }: EditorProp) => {
           },
         }}
         onUpdate={({ editor }) => {
-          onChange(editor.getJSON());
+          onChange(editor);
         }}
         slotAfter={<ImageResizer />}
       >
