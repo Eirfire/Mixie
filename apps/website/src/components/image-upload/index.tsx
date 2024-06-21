@@ -21,12 +21,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { z } from "zod";
 import { HeaderControls } from "../header-controls";
 import { ImageUploadType, ImagedUploadSchema } from "./form";
 import SearchUpload from "./search-upload";
 import UrlUpload from "./url-upload";
 import Upload from "./user-upload";
-import { z } from "zod";
 
 /**
  * Needs to be created in a form context with the form schema containing:

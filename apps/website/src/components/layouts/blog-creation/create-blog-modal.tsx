@@ -129,7 +129,7 @@ const CreateBlogModal = () => {
                   >
                     <FormControl>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Theme" />
+                        <SelectValue placeholder="Blog Type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>

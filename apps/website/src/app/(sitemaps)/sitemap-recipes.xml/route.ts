@@ -22,7 +22,7 @@ export async function GET() {
           // const time = new Date();
           return `
         <url>
-            <loc>${`https://www.mixiecooking.com/recipes/${data.id}`}</loc>
+            <loc>${`https://mixiecooking.com/recipes/${data.id}`}</loc>
             <lastmod>${time.toISOString()}</lastmod>        
         </url>
         `;

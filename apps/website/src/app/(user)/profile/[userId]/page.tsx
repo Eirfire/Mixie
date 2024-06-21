@@ -11,7 +11,7 @@ import Link from "next/link";
 
 interface ProfilePageProps {
   params: {
-    profile: string;
+    userId: string;
   };
 }
 
@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!users) return constructMetadata();
 
   const user = users.find((user: User) => {
-    user.id == params.profile;
+    user.id == params.userId;
   });
 
   return constructMetadata({
@@ -37,7 +37,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const signedInUser = await getUser();
 
   const users = await getUsers();
-  const user = users?.find((user: User) => user.id == params.profile);
+  const user = users?.find((user: User) => user.id == params.userId);
   const supabase = createClient();
 
   const { data: gotRecipes } = await supabase
@@ -46,7 +46,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
       `recipe_id, id, title, image_url, image_attributes, total_time, keywords`
     )
     .eq("public", true)
-    .eq("created_by", params.profile);
+    .eq("created_by", params.userId);
 
   if (user) {
     return (
@@ -64,7 +64,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <h2 className="text-step-1 text-center">{user.user_metadata.name}</h2>
           {signedInUser &&
             signedInUser.id == user.id &&
-            signedInUser.id == params.profile && (
+            signedInUser.id == params.userId && (
               <span className="mt-4 flex flex-row gap-4">
                 <Link
                   href={`/${user.id}/settings`}

@@ -18,10 +18,11 @@ const BlogEditor = ({ blog }: BlogEditorProps) => {
   const [content, setContent] = React.useState<string | undefined>(undefined);
   const [saveStatus, setSaveStatus] = React.useState("Not saved");
 
-  
   const form = useForm({
     resolver: zodResolver(blogEditSchema),
-    defaultValues: blog,
+    // defaultValues: {
+    //   ...blog
+    // },
   });
   const { setValue, handleSubmit } = form;
 

@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 interface SettingsParams {
-  profile: string;
+  userId: string;
 }
 
 const linkStyles = cva("text-step--2", {

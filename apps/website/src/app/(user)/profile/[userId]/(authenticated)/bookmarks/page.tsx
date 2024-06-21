@@ -10,17 +10,17 @@ export default async function BookmarksPage() {
     return notFound();
   }
 
-  const supabase = createClient();
+  // const supabase = createClient();
 
-  const { data: userCollections } = await supabase
-    .from("collections")
-    .select("*")
-    .eq("user_id", user.id);
+  // const { data: userCollections } = await supabase
+  //   .from("collections")
+  //   .select("*")
+  //   .eq("user_id", user.id);
 
-  const { data: userBookmarks } = await supabase
-    .from("bookmarks_view")
-    .select("*")
-    .eq("user_id", user.id);
+  // const { data: userBookmarks } = await supabase
+  //   .from("bookmarks_view")
+  //   .select("*")
+  //   .eq("user_id", user.id);
 
   return (
     <div className="m-auto mt-4 flex h-fit max-h-[80%] flex-col items-center justify-center rounded-xl bg-white p-1 shadow-main sm:w-full md:w-3/5 lg:min-h-80 dark:bg-grey dark:shadow-none">

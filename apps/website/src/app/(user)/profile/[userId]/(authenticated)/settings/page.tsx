@@ -23,7 +23,7 @@ const Account = dynamic(
 
 interface ProfilePageProps {
   params: {
-    profile: string;
+    userId: string;
   };
 }
 
