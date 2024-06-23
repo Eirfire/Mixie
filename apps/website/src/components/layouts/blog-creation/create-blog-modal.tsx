@@ -55,6 +55,11 @@ const CreateBlogModal = () => {
 
   const form = useForm<NewBlog>({
     resolver: zodResolver(blogEditSchema),
+    defaultValues: {
+      blog_type: "blog",
+      slug: "",
+      author_id: "",
+    },
   });
 
   const {

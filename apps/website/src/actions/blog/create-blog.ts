@@ -1,6 +1,7 @@
 "use server";
 
 import { action } from "@/actions/safe-action";
+import { recipeId } from "@/lib/utils";
 import { getUser } from "@/lib/utils/getUser";
 import { createClient } from "@/server/supabase/server";
 import { blogEditSchema } from "@/types";
@@ -19,6 +20,7 @@ export const createBlog = action(blogEditSchema, async (blog) => {
     .from("blog")
     .insert({
         ...blog,
+        slug: recipeId(blog.title),
         author_id: user.id,
     })
     .select("blog_id")

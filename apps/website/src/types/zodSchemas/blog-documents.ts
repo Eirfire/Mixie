@@ -5,6 +5,7 @@ import { image_attributesSchema } from "./recipes";
 export const blogSchema = z.object({
   blog_id: z.string(),
   title: z.string(),
+  slug: z.string(),
   image_url: z.string().url(),
   image_attributes: image_attributesSchema,
   content: z.string(),
@@ -19,12 +20,13 @@ export const blogSchema = z.object({
 export const blogEditSchema = z.object({
   blog_id: z.string().optional(),
   title: z.string(),
+  slug: z.string(),
   image_url: z.string().url().nullish(),
   image_attributes: image_attributesSchema.nullish(),
   content: z.string().default(""),
   tags: z.string().array().nullish(),
   blog_type: blog_type,
-  author_id: z.string().nullish(),
+  author_id: z.string(),
   published: z.boolean().default(false).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),

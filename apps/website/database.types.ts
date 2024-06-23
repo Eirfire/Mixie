@@ -19,6 +19,7 @@ export type Database = {
           image_attributes: Json | null;
           image_url: string | null;
           published: boolean;
+          slug: string;
           tags: string[] | null;
           title: string;
           updated_at: string;
@@ -32,6 +33,7 @@ export type Database = {
           image_attributes?: Json | null;
           image_url?: string | null;
           published?: boolean;
+          slug: string;
           tags?: string[] | null;
           title: string;
           updated_at?: string;
@@ -45,6 +47,7 @@ export type Database = {
           image_attributes?: Json | null;
           image_url?: string | null;
           published?: boolean;
+          slug?: string;
           tags?: string[] | null;
           title?: string;
           updated_at?: string;
