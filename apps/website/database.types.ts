@@ -9,6 +9,59 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      blog: {
+        Row: {
+          author_id: string;
+          blog_id: string;
+          blog_type: Database["public"]["Enums"]["blog_type"];
+          content: string;
+          created_at: string;
+          image_attributes: Json | null;
+          image_url: string | null;
+          published: boolean;
+          slug: string;
+          tags: string[] | null;
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          author_id: string;
+          blog_id?: string;
+          blog_type?: Database["public"]["Enums"]["blog_type"];
+          content: string;
+          created_at?: string;
+          image_attributes?: Json | null;
+          image_url?: string | null;
+          published?: boolean;
+          slug: string;
+          tags?: string[] | null;
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          author_id?: string;
+          blog_id?: string;
+          blog_type?: Database["public"]["Enums"]["blog_type"];
+          content?: string;
+          created_at?: string;
+          image_attributes?: Json | null;
+          image_url?: string | null;
+          published?: boolean;
+          slug?: string;
+          tags?: string[] | null;
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "blog_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       bookmark_link: {
         Row: {
           bookmark_id: string;
@@ -149,6 +202,33 @@ export type Database = {
           },
         ];
       };
+      documents: {
+        Row: {
+          content: string;
+          created_at: string;
+          document_id: string;
+          document_type: Database["public"]["Enums"]["document_type"];
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          content: string;
+          created_at?: string;
+          document_id?: string;
+          document_type: Database["public"]["Enums"]["document_type"];
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          content?: string;
+          created_at?: string;
+          document_id?: string;
+          document_type?: Database["public"]["Enums"]["document_type"];
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       feedback: {
         Row: {
           created_at: string;
@@ -185,6 +265,56 @@ export type Database = {
             foreignKeyName: "feedback_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      profiles: {
+        Row: {
+          bio: string | null;
+          created_at: string;
+          email: string | null;
+          first_name: string | null;
+          full_name: string | null;
+          last_name: string | null;
+          profile_id: string;
+          profile_picture: string | null;
+          updated_at: string;
+          user_name: string | null;
+          user_role: Database["public"]["Enums"]["user_role"];
+        };
+        Insert: {
+          bio?: string | null;
+          created_at?: string;
+          email?: string | null;
+          first_name?: string | null;
+          full_name?: string | null;
+          last_name?: string | null;
+          profile_id: string;
+          profile_picture?: string | null;
+          updated_at?: string;
+          user_name?: string | null;
+          user_role?: Database["public"]["Enums"]["user_role"];
+        };
+        Update: {
+          bio?: string | null;
+          created_at?: string;
+          email?: string | null;
+          first_name?: string | null;
+          full_name?: string | null;
+          last_name?: string | null;
+          profile_id?: string;
+          profile_picture?: string | null;
+          updated_at?: string;
+          user_name?: string | null;
+          user_role?: Database["public"]["Enums"]["user_role"];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_profile_id_fkey";
+            columns: ["profile_id"];
+            isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
@@ -374,6 +504,31 @@ export type Database = {
       };
     };
     Views: {
+      blog_view: {
+        Row: {
+          author_id: string | null;
+          author_meta: Json | null;
+          blog_id: string | null;
+          blog_type: Database["public"]["Enums"]["blog_type"] | null;
+          content: string | null;
+          created_at: string | null;
+          image_attributes: Json | null;
+          image_url: string | null;
+          published: boolean | null;
+          tags: string[] | null;
+          title: string | null;
+          updated_at: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "blog_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       bookmarks_view: {
         Row: {
           bookmark_id: string | null;
@@ -432,6 +587,7 @@ export type Database = {
         | "60_to_90"
         | "90_to_120"
         | "more_than_120";
+      blog_type: "blog" | "release" | "announcement" | "event";
       diet:
         | "none"
         | "vegetarian"
@@ -451,6 +607,7 @@ export type Database = {
         | "nut_free"
         | "egg_free";
       difficulty_level: "not_set" | "easy" | "medium" | "hard";
+      document_type: "privacy_policy" | "terms_of_service";
       feedback_type: "feature" | "bug" | "other";
       fonts: "default" | "open_dyslexic" | "monospace" | "serif" | "sans_serif";
       loveCooking:
@@ -487,6 +644,7 @@ export type Database = {
         | "can"
         | "bunch"
         | "bottle";
+      user_role: "user" | "admin";
     };
     CompositeTypes: {
       [_ in never]: never;

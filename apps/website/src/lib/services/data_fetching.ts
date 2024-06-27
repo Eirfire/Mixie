@@ -13,9 +13,7 @@ export const getRecipes = async () => {
 };
 
 export const getUsers = async () => {
-  const supabase = createAdminClient();
-  const {
-    data: { users },
-  } = await supabase.auth.admin.listUsers();
+  const supabase = createClient()
+  const {data: users} = await supabase.from("profiles").select();
   return users;
 };
