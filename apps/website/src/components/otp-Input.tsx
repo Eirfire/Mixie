@@ -117,7 +117,7 @@ const OtpInput = (props: Props) => {
              */
             className={cn(
               `input input-bordered text-xl 
-              md:text-3xl className || h-14 
+              md:text-3xl className h-14 
               w-14 rounded-md
               px-0 text-center md:h-16 md:w-14`,
               className
