@@ -3,7 +3,7 @@ import { FeedbackButton } from "@/components/open-dialogs";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "@supabase/supabase-js";
-import { env } from "env";
+
 import { Loader2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
@@ -37,7 +37,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   //   defaultValues: async () => {
   //     const res = await fetch(`/api/users/${params.profile}`, {
   //       headers: {
-  //         Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+  //         Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
   //       },
   //     });
   //     const user = await res.json();
@@ -68,7 +68,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   //     method: "PUT",
   //     headers: {
   //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+  //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
   //     },
   //     body: JSON.stringify(data),
   //   });

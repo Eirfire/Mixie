@@ -16,7 +16,7 @@ export async function GET() {
     ${
       recipes &&
       recipes
-        .map((data) => {
+        .map((data: { created_at: string | number | Date; id: any; }) => {
           // turn date into the correct string for the sitemap
           const time = new Date(data.created_at);
           // const time = new Date();

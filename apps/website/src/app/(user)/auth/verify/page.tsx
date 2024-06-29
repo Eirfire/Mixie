@@ -1,5 +1,5 @@
 "use client";
-import { env } from "env";
+
 import OtpInput from "@/components/otp-Input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";

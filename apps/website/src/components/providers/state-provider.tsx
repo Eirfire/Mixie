@@ -2,7 +2,7 @@
 import useUser from "@/hooks/useUser";
 import { Bookmark, Collection } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { env } from "env";
+
 import { atom, useAtom } from "jotai";
 import React, { useEffect } from "react";
 
@@ -26,7 +26,7 @@ const StateProvider = ({ children }: { children: React.ReactNode }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
         },
       });
 
@@ -46,7 +46,7 @@ const StateProvider = ({ children }: { children: React.ReactNode }) => {
 
       const res = await fetch(`/api/users/${user.id}/collections`, {
         headers: {
-          Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
         },
       });
       const returnCollections = (await res.json()) as Collection[];

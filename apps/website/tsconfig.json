@@ -6,7 +6,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "env": ["./env.mjs"],
       "database.types": ["./database.types.ts"]
     }
   },

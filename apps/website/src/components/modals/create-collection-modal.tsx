@@ -1,6 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { env } from "env";
+
 import { Plus, PlusCircleIcon } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -46,7 +46,7 @@ const CreateCollectionDialog = ({ userId }: CreateCollectionDialogProps) => {
       body: JSON.stringify(values),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
       },
     });
 

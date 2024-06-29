@@ -1,5 +1,5 @@
 import "server-only";
-import { env } from "env";
+
 import { log as axiomLog } from "next-axiom";
 
 type LogLevel = "info" | "error" | "warn";
@@ -28,7 +28,7 @@ interface Logger {
   warn(message: string, options?: LogOptions): void;
 }
 
-const log = env.NODE_ENV === "production" ? axiomLog : console;
+const log = process.env.NODE_ENV === "production" ? axiomLog : console;
 
 class Logger implements Logger {
   info(message: string, options?: LogOptions) {

@@ -17,7 +17,7 @@ import { RecipeCreationType } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Slot } from "@radix-ui/react-slot";
 import { useMutation } from "@tanstack/react-query";
-import { env } from "env";
+
 import { useAtom } from "jotai";
 import {
   BadgeAlertIcon,
@@ -71,7 +71,7 @@ const CreateRecipeDialog = () => {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
         },
       });
 

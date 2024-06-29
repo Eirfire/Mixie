@@ -23,7 +23,7 @@ import { feedbackSchema } from "@/types/zodSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { TablesInsert } from "database.types";
-import { env } from "env";
+
 import { useAtom } from "jotai";
 import { Bug, CircleHelp, Lightbulb, MessageCirclePlus } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -87,7 +87,7 @@ const FeedbackDialog = ({
       const create = fetch(`/api/feedback`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
         },
         body: JSON.stringify(data),
       });

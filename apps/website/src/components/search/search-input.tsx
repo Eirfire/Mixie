@@ -12,7 +12,7 @@ import {
   meal_times,
   sweet_savoury,
 } from "@/lib/services/data";
-import { env } from "env";
+
 import { FilterIcon } from "lucide-react";
 import React, { useState } from "react";
 
@@ -51,7 +51,7 @@ export const SearchInput = ({ setSearchResults }: SearchInputProps) => {
               {
                 headers: {
                   "Content-Type": "application/json",
-                  Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
                 },
               }
             );

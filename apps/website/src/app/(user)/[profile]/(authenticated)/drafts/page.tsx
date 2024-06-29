@@ -1,5 +1,6 @@
 import { CardRecipe, SearchCard } from "@/components/cards";
 import { createClient } from "@/server/supabase/server";
+import { Key } from "react";
 
 interface DraftsPageProps {
   params: {
@@ -21,7 +22,7 @@ export default async function DraftsPage({ params }: DraftsPageProps) {
       <h1 className="mb-2 text-center text-step0">Draft Recipes</h1>
       <ul className="flex flex-row flex-wrap justify-center gap-4">
         {recipes &&
-          recipes.map((recipe, index) => {
+          recipes.map((recipe: CardRecipe, index: Key | null | undefined) => {
             return (
               <SearchCard
                 as="li"

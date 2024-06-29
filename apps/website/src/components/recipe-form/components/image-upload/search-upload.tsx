@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { recipeClientFormSchema } from "@/types/zodSchemas";
 import { useQuery } from "@tanstack/react-query";
-import { env } from "env";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import { createApi } from "unsplash-js";
 import * as z from "zod";
 
 const api = createApi({
-  accessKey: env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY,
+  accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!,
 });
 const SearchUpload = () => {
   const [unsplashImageSearch, setUnsplashImageSearch] = useState<string>("");

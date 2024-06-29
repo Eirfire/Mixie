@@ -1,4 +1,3 @@
-import { env } from "env";
 import { getUser } from "@/lib/utils/getUser";
 import type { NextRequest } from "next/server";
 
@@ -10,7 +9,7 @@ export const isApp = async (req: NextRequest) => {
       return false;
     }
 
-    if (Authorization == `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`) {
+    if (Authorization == `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`) {
       return true;
     }
   } catch (error) {

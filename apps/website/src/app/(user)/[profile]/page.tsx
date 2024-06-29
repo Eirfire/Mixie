@@ -8,6 +8,7 @@ import { Heart, Pencil, ScrollText } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Key } from "react";
 
 interface ProfilePageProps {
   params: {
@@ -93,7 +94,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <h1 className="mb-2 text-center text-step0">Recipes</h1>
           <ul className="flex flex-row flex-wrap justify-center gap-4">
             {gotRecipes &&
-              gotRecipes.map((recipe, index) => {
+              gotRecipes.map((recipe: CardRecipe, index: Key | null | undefined) => {
                 return (
                   <SearchCard
                     as="li"

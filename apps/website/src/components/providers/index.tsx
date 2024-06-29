@@ -18,7 +18,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             {children}
           </NextThemesProvider>
 
-          {/* {process.env.NODE_ENV === "development" && (
+          {/* {process.process.env.NODE_ENV === "development" && (
           <ReactQueryDevtools initialIsOpen={false} />
         )} */}
         </QueryClientProvider>

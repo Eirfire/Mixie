@@ -15,7 +15,7 @@ import {
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { env } from "env";
+
 import { useAtom } from "jotai";
 import { CheckCircle, HeartIcon, PlusCircle } from "lucide-react";
 import Image from "next/image";
@@ -70,7 +70,7 @@ const BookmarkRecipeDialog = ({
         body: JSON.stringify(collections),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
         },
       });
 
@@ -107,7 +107,7 @@ const BookmarkRecipeDialog = ({
           } as z.infer<typeof bookmarkRouteSchema>),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${env.NEXT_PUBLIC_API_APP_TOKEN}`,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_APP_TOKEN}`,
           },
         }
       );
