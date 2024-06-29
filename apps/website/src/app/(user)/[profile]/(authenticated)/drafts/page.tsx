@@ -22,12 +22,12 @@ export default async function DraftsPage({ params }: DraftsPageProps) {
       <h1 className="mb-2 text-center text-step0">Draft Recipes</h1>
       <ul className="flex flex-row flex-wrap justify-center gap-4">
         {recipes &&
-          recipes.map((recipe: CardRecipe, index: Key | null | undefined) => {
+          (recipes as CardRecipe[]).map((recipe) => {
             return (
               <SearchCard
                 as="li"
-                key={index}
-                recipe={recipe as CardRecipe}
+                key={recipe.recipe_id}
+                recipe={recipe}
                 edit={true}
               />
             );
