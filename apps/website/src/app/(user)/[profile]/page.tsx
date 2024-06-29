@@ -94,13 +94,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <h1 className="mb-2 text-center text-step0">Recipes</h1>
           <ul className="flex flex-row flex-wrap justify-center gap-4">
             {gotRecipes &&
-              gotRecipes.map((recipe: CardRecipe, index: Key | null | undefined) => {
+              (gotRecipes as CardRecipe[]).map((recipe) => {
                 return (
-                  <SearchCard
-                    as="li"
-                    key={index}
-                    recipe={recipe as CardRecipe}
-                  />
+                  <SearchCard as="li" key={recipe.recipe_id} recipe={recipe} />
                 );
               })}
           </ul>
